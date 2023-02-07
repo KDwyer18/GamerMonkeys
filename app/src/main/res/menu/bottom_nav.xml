@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Home"
+        android:id="@+id/home"
+        android:icon="@drawable/baseline_brightness_1_24"/>
+    <item android:title="BMR"
+        android:id="@+id/bmr"
+        android:icon="@drawable/baseline_square_24" />
+    <item android:title="TBD"
+        android:id="@+id/tbd"
+        android:icon="@drawable/baseline_back_hand_24"/>
+</menu>
