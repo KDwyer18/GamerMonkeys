@@ -29,12 +29,12 @@ class Register : AppCompatActivity() {
         spinner.adapter = arrayAdapter
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                TODO("Not yet implemented")
+                //("Not yet implemented")
                 Toast.makeText(applicationContext, "selected age is =" + ages[p2], Toast.LENGTH_SHORT).show()
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
+               //("Not yet implemented")
             }
         }
 
