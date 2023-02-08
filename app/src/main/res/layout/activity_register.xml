@@ -215,5 +215,14 @@
         app:layout_constraintStart_toStartOf="@+id/activityLevelSpinner"
         app:layout_constraintTop_toTopOf="@+id/activityLevelSpinner" />
 
+    <Button
+        android:id="@+id/pfpButton"
+        style="@style/Widget.AppCompat.Button.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        tools:layout_editor_absoluteX="240dp"
+        tools:layout_editor_absoluteY="207dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
