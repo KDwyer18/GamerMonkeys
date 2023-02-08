@@ -23,11 +23,17 @@ class Register : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_register)
 
+        //Login Button
         val loginButton = findViewById<Button>(R.id.loginButton)
         loginButton.setOnClickListener{
             openHomeActivity()
         }
 
+        //Full Name
+
+        //Location
+
+        //Age Spinner
         val spinner = findViewById<Spinner>(R.id.ageSpinner)
         val arrayAdapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, ages)
         spinner.adapter = arrayAdapter
@@ -42,6 +48,15 @@ class Register : AppCompatActivity() {
             }
         }
 
+        //Height Spinner
+
+        //Weight
+
+        //Gender Spinner
+
+        //Activity Level Spinner
+
+        //Profile Picture
 
     }
 
