@@ -1,28 +1,32 @@
 package com.example.gamermonke
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
-import com.example.gamermonke.databinding.ActivityMainBinding
+import android.widget.*
+import androidx.fragment.app.Fragment
+import com.example.gamermonke.databinding.ActivityRegisterBinding
 
 
 class Register : AppCompatActivity() {
 
-    private lateinit var binding : ActivityMainBinding
+    private lateinit var binding : ActivityRegisterBinding
 
-    val intAges = IntArray(100) { (it + 1) }
-//    val ages =  intAges.map { it.toString() }.toTypedArray()
+    private val intAges = IntArray(100) { (it + 1) }
+    val ages =  intAges.map { it.toString() }.toTypedArray()
 
-    val ages = arrayOf("1","2","3")
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_register)
+
+        val loginButton = findViewById<Button>(R.id.loginButton)
+        loginButton.setOnClickListener{
+            openHomeActivity()
+        }
 
         val spinner = findViewById<Spinner>(R.id.ageSpinner)
         val arrayAdapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, ages)
@@ -34,14 +38,15 @@ class Register : AppCompatActivity() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-               //("Not yet implemented")
+                //("Not yet implemented")
             }
         }
 
 
+    }
 
-
-
-
+    private fun openHomeActivity() {
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
     }
 }
