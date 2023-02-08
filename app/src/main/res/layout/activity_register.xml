@@ -198,6 +198,7 @@
         android:layout_height="51dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:contentDescription="activityLevel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/heightSpinner" />
 
@@ -205,10 +206,11 @@
         android:id="@+id/activityLevelText"
         android:layout_width="180dp"
         android:layout_height="51dp"
+        android:contentDescription="activityLevel"
         android:ems="3"
         android:hint="Activity Level"
-        android:padding="12dp"
 
+        android:padding="12dp"
         android:textColor="#000"
         android:textColorHint="#D8D4D4"
         android:textSize="20sp"
@@ -220,9 +222,12 @@
         style="@style/Widget.AppCompat.Button.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="115dp"
+        android:contentDescription="pfpButton"
         android:text="+"
-        tools:layout_editor_absoluteX="240dp"
-        tools:layout_editor_absoluteY="207dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
