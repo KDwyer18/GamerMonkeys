@@ -1,5 +1,6 @@
 package com.example.gamermonke
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,7 +15,22 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_home)
 
+        val name = intent.getStringExtra("EXTRA_FULLNAME")
+        val location = intent.getStringExtra("EXTRA_LOCATION")
+        val age = intent.getStringExtra("EXTRA_AGE")
+        val height = intent.getStringExtra("EXTRA_HEIGHT")
+        val weight = intent.getStringExtra("EXTRA_WEIGHT")
+        val gender = intent.getStringExtra("EXTRA_GENDER")
+        val activityLvl = intent.getStringExtra("EXTRA_ACTIVITY")
         replaceFragment(Home())
+
+        println(name)
+        println(location)
+        println(age)
+        println(height)
+        println(weight)
+        println(gender)
+        println(activityLvl)
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.setOnItemSelectedListener {
@@ -29,7 +45,9 @@ class HomeActivity : AppCompatActivity() {
 
             true
         }
+
     }
+
 
 
     private fun replaceFragment(fragment : Fragment) {

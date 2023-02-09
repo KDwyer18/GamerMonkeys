@@ -16,9 +16,6 @@ class MainActivity : AppCompatActivity() {
         binding = inflate(layoutInflater)
         setContentView(binding.root)
         openRegister()
-
-
-
     }
 
     private fun openRegister() {
