@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
-import androidx.fragment.app.Fragment
 import com.example.gamermonke.databinding.ActivityRegisterBinding
 
 
@@ -13,34 +12,80 @@ class Register : AppCompatActivity() {
 
     private lateinit var binding : ActivityRegisterBinding
 
-    private val intAges = IntArray(100) { (it + 1) }
-    val ages =  intAges.map { it.toString() }.toTypedArray()
 
-
+    val genderArr = arrayOf("","male", "female")
+    val activityLevelArr = arrayOf("", "beginner", "intermediate", "advanced")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_register)
 
-        //Login Button
-        val loginButton = findViewById<Button>(R.id.loginButton)
-        loginButton.setOnClickListener{
-            openHomeActivity()
-        }
 
         //Full Name
+        var userFullName = findViewById<EditText>(R.id.fullName)
 
         //Location
+        val userLocation = findViewById<EditText>(R.id.location)
 
-        //Age Spinner
-        val spinner = findViewById<Spinner>(R.id.ageSpinner)
-        val arrayAdapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, ages)
-        spinner.adapter = arrayAdapter
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        //Age
+        val userAge = findViewById<EditText>(R.id.ageText)
+        val ageString: String = userAge.text.toString()
+        if(isNumeric(ageString)){
+            //he valid
+        } else {
+            //invalid age
+        }
+        //Height
+        val userHeight = findViewById<EditText>(R.id.heightText)
+
+        //Weight
+        val userWeight = findViewById<EditText>(R.id.weight)
+        val weightString: String = userAge.text.toString()
+        if(isNumeric(weightString)){
+            //he valid
+        } else {
+            //invalid weight
+        }
+
+        //Gender Spinner
+        var genderSpinnerVar = ""
+        val genderSpinnerVal = findViewById<Spinner>(R.id.genderSpinner)
+        val genderSpinnerAdapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, genderArr)
+        genderSpinnerVal.adapter = genderSpinnerAdapter
+        genderSpinnerVal.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 //("Not yet implemented")
-                Toast.makeText(applicationContext, "selected age is =" + ages[p2], Toast.LENGTH_SHORT).show()
+                genderSpinnerVar = genderArr[p2]
+                val genderText = findViewById<TextView>(R.id.genderText)
+                if(genderSpinnerVar != ""){
+                    genderText.visibility = View.INVISIBLE
+                } else {
+                    genderText.visibility = View.VISIBLE
+                }
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                //("Not yet implemented")
+            }
+
+        }
+
+
+        //Activity Level Spinner
+        var activitySpinnerVar = ""
+        val activitySpinnerVal = findViewById<Spinner>(R.id.activityLevelSpinner)
+        val activitySpinnerAdapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, activityLevelArr)
+        activitySpinnerVal.adapter = activitySpinnerAdapter
+        activitySpinnerVal.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                //("Not yet implemented")
+                activitySpinnerVar = activityLevelArr[p2]
+                val activityText = findViewById<TextView>(R.id.activityLevelText)
+                if(genderSpinnerVar != ""){
+                    activityText.visibility = View.INVISIBLE
+                } else {
+                    activityText.visibility = View.VISIBLE
+                }
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -48,20 +93,35 @@ class Register : AppCompatActivity() {
             }
         }
 
-        //Height Spinner
-
-        //Weight
-
-        //Gender Spinner
-
-        //Activity Level Spinner
 
         //Profile Picture
 
+        //Login Button
+        val loginButton = findViewById<Button>(R.id.loginButton)
+        loginButton.setOnClickListener{
+            val msg: String = userFullName.text.toString()
+
+            if(msg.trim().isNotEmpty()) {
+                val intent = Intent(this, HomeActivity::class.java)
+                intent.putExtra("EXTRA_FULLNAME", userFullName.text.toString())
+                intent.putExtra("EXTRA_LOCATION", userLocation.text.toString())
+                intent.putExtra("EXTRA_AGE", ageString)
+                intent.putExtra("EXTRA_HEIGHT", userHeight.text.toString())
+                intent.putExtra("EXTRA_WEIGHT", weightString)
+                intent.putExtra("EXTRA_GENDER", genderSpinnerVar)
+                intent.putExtra("EXTRA_ACTIVITY", activitySpinnerVar)
+//                intent.putExtra("EXTRA_PFP")
+                startActivity(intent)
+            } else {
+                Toast.makeText(applicationContext, "Full Name is required", Toast.LENGTH_SHORT).show()
+            }
+        }
+
     }
 
-    private fun openHomeActivity() {
-        val intent = Intent(this, HomeActivity::class.java)
-        startActivity(intent)
+
+    private fun isNumeric(toCheck : String): Boolean{
+        val parsedInt = toCheck.toIntOrNull()
+        return parsedInt != null
     }
 }
