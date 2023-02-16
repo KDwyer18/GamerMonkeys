@@ -3,6 +3,7 @@ package com.example.gamermonke
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.View
 import android.widget.*
 import com.example.gamermonke.databinding.ActivityRegisterBinding
@@ -16,15 +17,23 @@ class Register : AppCompatActivity() {
     val genderArr = arrayOf("","male", "female")
     val activityLevelArr = arrayOf("", "beginner", "intermediate", "advanced")
 
+    private var mETUserName: EditText? = null
+    private var mETAddress: EditText? = null
+    private var mETAge: EditText? = null
+    private var mTVActivityLevel: TextView? = null
+    private var mStringActivityLevel: String? = null
+    private var mStringAddress: String? = null
+    private var mAge: Int? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_register)
 
 
-        //Full Name
-        var userFullName = findViewById<EditText>(R.id.fullName)
 
+        //Full Name
+        var userFullName = findViewById<EditText>(R.id.fullName) as EditText
         //Location
         val userLocation = findViewById<EditText>(R.id.location)
 
@@ -124,4 +133,22 @@ class Register : AppCompatActivity() {
         val parsedInt = toCheck.toIntOrNull()
         return parsedInt != null
     }
+    // Modify these to store username, address, etc. in a summary page
+//    override fun onSaveInstanceState(outState: Bundle)
+//    {
+//        // Call superclass so it can save view hierarchy
+//        super.onSaveInstanceState(outState)
+//
+//        mStringActivityLevel = mTVActivityLevel!!.text.toString()
+//
+//        // Save user's current state
+//        outState.putString("Activity_Text", mStringActivityLevel)
+//    }
+//
+//    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+//        super.onRestoreInstanceState(savedInstanceState)
+//
+//        val activityLevel: String? = savedInstanceState.getString("Activity_Text")
+//        findViewById<TextView>(R.id.activityLevelText).setText(activityLevel.toString())
+//    }
 }

@@ -34,6 +34,8 @@
         android:textColor="#000"
         android:textColorHint="#D8D4D4"
         android:textSize="20sp"
+        android:text=""
+        android:saveEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
