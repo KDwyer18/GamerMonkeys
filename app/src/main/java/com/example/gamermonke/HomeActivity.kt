@@ -10,6 +10,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 private lateinit var binding : ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
@@ -23,21 +24,22 @@ class HomeActivity : AppCompatActivity() {
         val gender = intent.getStringExtra("EXTRA_GENDER")
         val activityLvl = intent.getStringExtra("EXTRA_ACTIVITY")
         replaceFragment(Home())
+//        var bdl = Bundle()
+//        bdl.putString("age", age)
+//        bdl.putString("height", height)
+//        bdl.putString("weight", weight)
+//        bdl.putString("sex", gender)
 
-        println(name)
-        println(location)
-        println(age)
-        println(height)
-        println(weight)
-        println(gender)
-        println(activityLvl)
+        // Pass values into the BMR Fragment
+//        var mBMRIntent = Intent(this@HomeActivity, BMR::class.java)
+//        mBMRIntent.putExtras(bdl)
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.setOnItemSelectedListener {
 
             when(it.itemId){
                 R.id.home -> replaceFragment(Home())
-                R.id.bmr -> replaceFragment(BMR())
+                R.id.bmr -> replaceFragment(BMR(age, height, weight, gender))
                 R.id.tbd -> replaceFragment(TBD())
 
                 else ->{}
@@ -47,8 +49,6 @@ class HomeActivity : AppCompatActivity() {
         }
 
     }
-
-
 
     private fun replaceFragment(fragment : Fragment) {
         val fragmentManager = supportFragmentManager
