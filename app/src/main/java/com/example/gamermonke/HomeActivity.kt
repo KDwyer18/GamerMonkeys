@@ -1,9 +1,7 @@
 package com.example.gamermonke
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.gamermonke.databinding.ActivityHomeBinding
 import com.google.android.material.appbar.MaterialToolbar
@@ -75,7 +73,7 @@ class HomeActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.home -> replaceFragment(Home())
                 R.id.bmr -> replaceFragment(BMR(age, height, weight, gender))
-                R.id.tbd -> replaceFragment(TBD())
+                R.id.hikes -> replaceFragment(Hikes())
 
                 else ->{}
             }
