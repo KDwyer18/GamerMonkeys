@@ -30,8 +30,7 @@ class Register : AppCompatActivity() {
 
         //Age
         val userAge = findViewById<EditText>(R.id.ageText)
-        val ageString: String = userAge.text.toString()
-        if(isNumeric(ageString)){
+        if(isNumeric(userAge.text.toString())){
             //he valid
         } else {
             //invalid age
@@ -105,9 +104,9 @@ class Register : AppCompatActivity() {
                 val intent = Intent(this, HomeActivity::class.java)
                 intent.putExtra("EXTRA_FULLNAME", userFullName.text.toString())
                 intent.putExtra("EXTRA_LOCATION", userLocation.text.toString())
-                intent.putExtra("EXTRA_AGE", ageString)
+                intent.putExtra("EXTRA_AGE", userAge.text.toString())
                 intent.putExtra("EXTRA_HEIGHT", userHeight.text.toString())
-                intent.putExtra("EXTRA_WEIGHT", weightString)
+                intent.putExtra("EXTRA_WEIGHT", userWeight.text.toString())
                 intent.putExtra("EXTRA_GENDER", genderSpinnerVar)
                 intent.putExtra("EXTRA_ACTIVITY", activitySpinnerVar)
 //                intent.putExtra("EXTRA_PFP")
