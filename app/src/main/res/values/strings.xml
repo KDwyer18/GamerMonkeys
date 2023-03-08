@@ -9,4 +9,9 @@
         <item>3</item>
         <item>4</item>
     </string-array>
+
+    <string name="search">Search</string>
+    <string name="weather_type">Clear</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
 </resources>
