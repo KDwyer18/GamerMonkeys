@@ -59,7 +59,7 @@
                 android:textSize="90sp"
                 android:fontFamily="sans-serif-thin"
                 android:layout_gravity="center"
-                android:text="24°F">
+                android:text="24°C">
 
             </TextView>
             <LinearLayout
@@ -133,7 +133,7 @@
                         android:id="@+id/sunrise"
                         android:textSize="14sp"
                         android:text="5:00AM">
-                        
+
                     </TextView>
 
                 </LinearLayout>

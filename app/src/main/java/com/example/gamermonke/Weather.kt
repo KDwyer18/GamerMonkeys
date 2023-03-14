@@ -29,7 +29,7 @@ class Weather : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    val city_name: String = "SLC,UT"
+    val city_name: String = "london,uk"
     val API: String = "9ff22c60ea17c990ff4447c2d37d14d4"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,65 +38,6 @@ class Weather : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-        weatherTask().execute()
-    }
-    inner class weatherTask() : AsyncTask<String, Void, String>()
-    {
-        override fun onPreExecute() {
-            super.onPreExecute()
-            fragmentView.findViewById<ProgressBar>(R.id.loader).visibility = View.VISIBLE
-            findViewById<RelativeLayout>(R.id.main_container).visibility = View.GONE
-            findViewById<TextView>(R.id.error_warning).visibility = View.GONE
-        }
-        override fun doInBackground(vararg p0: String?): String? {
-            var response:String?
-            try {
-                response = URL("https://api.openweathermap.org/data/2.5/weather?q=$city_name&unites=metric&appid=$API")
-                    .readText(Charsets.UTF_8)
-            }
-            catch (e: Exception)
-            {
-                response = null
-            }
-            return response
-        }
-
-        override fun onPostExecute(result: String?) {
-            super.onPostExecute(result)
-            try {
-                val jsonObj = JSONObject(result)
-                val main = jsonObj.getJSONObject("main")
-                val sys = jsonObj.getJSONObject("sys")
-                val wind = jsonObj.getJSONObject("wind")
-                val weather = jsonObj.getJSONArray("weather").getJSONObject(0)
-                val updatedAt:Long = jsonObj.getLong("dt")
-                val updatedAtText = "Updated at: " + SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.ENGLISH).format(Date())
-                val temp = main.getString("temp") + "°C"
-                val tempMin = "Min Temp: " + main.getString("temp_min")+"°C"
-                val tempMax = "Max Temp: " + main.getString("temp_max")+"°C"
-                val pressure = main.getString("pressure")
-                val humidity = main.getString("humidity")
-                val sunrise:Long = sys.getLong("sunrise")
-                val sunset:Long = sys.getLong("sunset")
-                val windSpeed = wind.getString("speed")
-                val weatherDescription = weather.getString("description")
-                val address = jsonObj.getString("name") + ", " + sys.getString("country")
-
-                fragmentView.findViewByID<TextView>(R.id.address).text = address
-                fragmentView.findViewByID<TextView>(R.id.tv_updated_time).text = updatedAtText
-                fragmentView.findViewByID<TextView>(R.id.status).text = weatherDescription.capitalize()
-                fragmentView.findViewByID<TextView>(R.id.temp).text = temp
-                fragmentView.findViewByID<TextView>(R.id.tv_min_temp).text = tempMin
-                fragmentView.findViewByID<TextView>(R.id.tv_max_temp).text = tempMax
-                fragmentView.findViewByID<TextView>(R.id.sunrise).text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunrise))
-                fragmentView.findViewByID<TextView>(R.id.sunset).text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunset))
-
-
-            }
-            catch (e:Exception){
-
-            }
-        }
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -104,7 +45,74 @@ class Weather : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val fragmentView = inflater.inflate(R.layout.fragment_weather, container, false)
-        return inflater.inflate(R.layout.fragment_weather, container, false)
+
+
+        class weatherTask() : AsyncTask<String, Void, String>()
+        {
+            override fun onPreExecute() {
+                super.onPreExecute()
+                fragmentView.findViewById<ProgressBar>(R.id.loader).visibility = View.VISIBLE
+                fragmentView.findViewById<RelativeLayout>(R.id.main_container).visibility = View.GONE
+                fragmentView.findViewById<TextView>(R.id.error_warning).visibility = View.GONE
+            }
+            override fun doInBackground(vararg p0: String?): String? {
+                var response:String?
+                try {
+                    response = URL("https://api.openweathermap.org/data/2.5/weather?q=$city_name&unites=metric&appid=$API")
+                        .readText(Charsets.UTF_8)
+                }
+                catch (e: Exception)
+                {
+                    response = null
+                }
+                return response
+            }
+
+            override fun onPostExecute(result: String?) {
+                super.onPostExecute(result)
+                try {
+                    val jsonObj = JSONObject(result)
+                    val main = jsonObj.getJSONObject("main")
+                    val sys = jsonObj.getJSONObject("sys")
+                    val wind = jsonObj.getJSONObject("wind")
+                    val weather = jsonObj.getJSONArray("weather").getJSONObject(0)
+                    val updatedAt:Long = jsonObj.getLong("dt")
+                    val updatedAtText = "Updated at: " + SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.ENGLISH).format(Date())
+                    val temp = main.getString("temp") + "°C"
+                    val tempMin = "Min Temp: " + main.getString("temp_min")+"°C"
+                    val tempMax = "Max Temp: " + main.getString("temp_max")+"°C"
+                    val pressure = main.getString("pressure")
+                    val humidity = main.getString("humidity")
+                    val sunrise:Long = sys.getLong("sunrise")
+                    val sunset:Long = sys.getLong("sunset")
+                    val windSpeed = wind.getString("speed")
+                    val weatherDescription = weather.getString("description")
+                    val address = jsonObj.getString("name") + ", " + sys.getString("country")
+
+                    fragmentView.findViewById<TextView>(R.id.address).text = address
+                    fragmentView.findViewById<TextView>(R.id.tv_updated_time).text = updatedAtText
+                    fragmentView.findViewById<TextView>(R.id.status).text = weatherDescription.capitalize()
+                    fragmentView.findViewById<TextView>(R.id.temp).text = temp
+                    fragmentView.findViewById<TextView>(R.id.tv_min_temp).text = tempMin
+                    fragmentView.findViewById<TextView>(R.id.tv_max_temp).text = tempMax
+                    fragmentView.findViewById<TextView>(R.id.sunrise).text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunrise))
+                    fragmentView.findViewById<TextView>(R.id.sunset).text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunset))
+                    fragmentView.findViewById<TextView>(R.id.wind).text = windSpeed
+                    fragmentView.findViewById<TextView>(R.id.pressure).text = pressure
+                    fragmentView.findViewById<TextView>(R.id.humidity).text = humidity
+
+                    fragmentView.findViewById<ProgressBar>(R.id.loader).visibility = View.GONE
+                    fragmentView.findViewById<RelativeLayout>(R.id.main_container).visibility = View.VISIBLE
+                }
+                catch (e:Exception){
+                    fragmentView.findViewById<ProgressBar>(R.id.loader).visibility = View.GONE
+                    fragmentView.findViewById<TextView>(R.id.error_warning).visibility = View.VISIBLE
+                }
+            }
+
+        }
+        weatherTask().execute()
+        return fragmentView
     }
 
     companion object {
