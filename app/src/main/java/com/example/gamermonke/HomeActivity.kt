@@ -19,14 +19,17 @@ class HomeActivity : AppCompatActivity() {
         val name = intent.getStringExtra("EXTRA_FULLNAME")
         val location = intent.getStringExtra("EXTRA_LOCATION")
         val age = intent.getStringExtra("EXTRA_AGE")
-        val foot = intent.getStringExtra("EXTRA_FOOT")
-        val inches = intent.getStringExtra("EXTRA_INCHES")
+        val ft = intent.getStringExtra("EXTRA_FOOT")
+        val inch = intent.getStringExtra("EXTRA_INCHES")
         val weight = intent.getStringExtra("EXTRA_WEIGHT")
-        val gender = intent.getStringExtra("EXTRA_GENDER")
+        val gender = intent.getStringExtra("EXTRA_SEX")
         val activityLvl = intent.getStringExtra("EXTRA_ACTIVITY")
+//        val pfp = intent.getParcelableExtra("PFP_IMAGE")
         replaceFragment(Home())
 
-        val height = "$foot'$inches"
+        println(ft)
+        val height:String? = "$ft'$inch"
+        println(height)
         var reset = false
 
         if(age.isNullOrBlank() || height.isNullOrBlank() || gender.isNullOrBlank() || gender.isNullOrBlank()){
