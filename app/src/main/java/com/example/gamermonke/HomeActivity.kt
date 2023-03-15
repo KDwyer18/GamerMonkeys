@@ -19,12 +19,14 @@ class HomeActivity : AppCompatActivity() {
         val name = intent.getStringExtra("EXTRA_FULLNAME")
         val location = intent.getStringExtra("EXTRA_LOCATION")
         val age = intent.getStringExtra("EXTRA_AGE")
-        val height = intent.getStringExtra("EXTRA_HEIGHT")
+        val foot = intent.getStringExtra("EXTRA_FOOT")
+        val inches = intent.getStringExtra("EXTRA_INCHES")
         val weight = intent.getStringExtra("EXTRA_WEIGHT")
         val gender = intent.getStringExtra("EXTRA_GENDER")
         val activityLvl = intent.getStringExtra("EXTRA_ACTIVITY")
         replaceFragment(Home())
 
+        val height = "$foot'$inches"
         var reset = false
 
         if(age.isNullOrBlank() || height.isNullOrBlank() || gender.isNullOrBlank() || gender.isNullOrBlank()){
