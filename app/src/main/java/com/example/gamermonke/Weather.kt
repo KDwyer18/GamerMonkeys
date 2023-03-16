@@ -29,7 +29,7 @@ class Weather : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    val city_name: String = "london,uk"
+    val city_name: String = "london"
     val API: String = "9ff22c60ea17c990ff4447c2d37d14d4"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,7 +58,7 @@ class Weather : Fragment() {
             override fun doInBackground(vararg p0: String?): String? {
                 var response:String?
                 try {
-                    response = URL("https://api.openweathermap.org/data/2.5/weather?q=$city_name&unites=metric&appid=$API")
+                    response = URL("https://api.openweathermap.org/data/2.5/weather?q=$city_name&units=metric&appid=$API")
                         .readText(Charsets.UTF_8)
                 }
                 catch (e: Exception)
@@ -95,8 +95,8 @@ class Weather : Fragment() {
                     fragmentView.findViewById<TextView>(R.id.temp).text = temp
                     fragmentView.findViewById<TextView>(R.id.tv_min_temp).text = tempMin
                     fragmentView.findViewById<TextView>(R.id.tv_max_temp).text = tempMax
-                    fragmentView.findViewById<TextView>(R.id.sunrise).text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunrise))
-                    fragmentView.findViewById<TextView>(R.id.sunset).text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunset))
+                    fragmentView.findViewById<TextView>(R.id.sunrise).text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunrise*1000))
+                    fragmentView.findViewById<TextView>(R.id.sunset).text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunset*1000))
                     fragmentView.findViewById<TextView>(R.id.wind).text = windSpeed
                     fragmentView.findViewById<TextView>(R.id.pressure).text = pressure
                     fragmentView.findViewById<TextView>(R.id.humidity).text = humidity
