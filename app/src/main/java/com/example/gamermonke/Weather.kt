@@ -29,7 +29,7 @@ class Weather : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    val city_name: String = "london"
+    val city_name: String = "Salt Lake City, USA"
     val API: String = "9ff22c60ea17c990ff4447c2d37d14d4"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,7 +77,7 @@ class Weather : Fragment() {
                     val wind = jsonObj.getJSONObject("wind")
                     val weather = jsonObj.getJSONArray("weather").getJSONObject(0)
                     val updatedAt:Long = jsonObj.getLong("dt")
-                    val updatedAtText = "Updated at: " + SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.ENGLISH).format(Date())
+                    val updatedAtText = "Updated at: " + SimpleDateFormat("MM/dd/yyyy hh:mm a", Locale.US).format(Date(updatedAt*1000))
                     val temp = main.getString("temp") + "°C"
                     val tempMin = "Min Temp: " + main.getString("temp_min")+"°C"
                     val tempMax = "Max Temp: " + main.getString("temp_max")+"°C"
@@ -85,6 +85,7 @@ class Weather : Fragment() {
                     val humidity = main.getString("humidity")
                     val sunrise:Long = sys.getLong("sunrise")
                     val sunset:Long = sys.getLong("sunset")
+                    val timezone = jsonObj.getInt("timezone")
                     val windSpeed = wind.getString("speed")
                     val weatherDescription = weather.getString("description")
                     val address = jsonObj.getString("name") + ", " + sys.getString("country")
@@ -95,8 +96,8 @@ class Weather : Fragment() {
                     fragmentView.findViewById<TextView>(R.id.temp).text = temp
                     fragmentView.findViewById<TextView>(R.id.tv_min_temp).text = tempMin
                     fragmentView.findViewById<TextView>(R.id.tv_max_temp).text = tempMax
-                    fragmentView.findViewById<TextView>(R.id.sunrise).text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunrise*1000))
-                    fragmentView.findViewById<TextView>(R.id.sunset).text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunset*1000))
+                    fragmentView.findViewById<TextView>(R.id.sunrise).text = SimpleDateFormat("hh:mm a", Locale.US).format(Date(sunrise*1000))
+                    fragmentView.findViewById<TextView>(R.id.sunset).text = SimpleDateFormat("hh:mm a", Locale.US).format(Date(sunset*1000))
                     fragmentView.findViewById<TextView>(R.id.wind).text = windSpeed
                     fragmentView.findViewById<TextView>(R.id.pressure).text = pressure
                     fragmentView.findViewById<TextView>(R.id.humidity).text = humidity
