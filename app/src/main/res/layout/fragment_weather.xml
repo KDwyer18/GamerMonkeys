@@ -19,21 +19,24 @@
             android:id="@+id/address_container"
             android:orientation="vertical"
             android:gravity="center">
+
             <TextView
+                android:id="@+id/address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/address"
-                android:textSize="24sp"
-                android:text="Location">
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="45dp"
+                android:text="Location"
+                android:textSize="24sp">
 
             </TextView>
+
             <TextView
+                android:id="@+id/tv_updated_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_updated_time"
-                android:textSize="14sp"
                 android:text="Updated At"
-                >
+                android:textSize="14sp">
 
             </TextView>
         </LinearLayout>
