@@ -253,14 +253,6 @@
 
     </LinearLayout>
 
- <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Home Fragment"
-        android:textSize="26dp"
-        android:textColor="@color/feldgrau"
-        android:fontFamily="sans-serif-medium"
-        android:layout_gravity="center" />
 
 
 
