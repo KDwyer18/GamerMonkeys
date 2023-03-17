@@ -19,20 +19,17 @@ class HomeActivity : AppCompatActivity() {
         val name = intent.getStringExtra("EXTRA_FULLNAME")
         val location = intent.getStringExtra("EXTRA_LOCATION")
         val age = intent.getStringExtra("EXTRA_AGE")
-        val ft = intent.getStringExtra("EXTRA_FOOT")
-        val inch = intent.getStringExtra("EXTRA_INCHES")
+        val foot = intent.getStringExtra("EXTRA_FOOT")
+        val inches = intent.getStringExtra("EXTRA_INCHES")
         val weight = intent.getStringExtra("EXTRA_WEIGHT")
-        val gender = intent.getStringExtra("EXTRA_SEX")
+        val sex = intent.getStringExtra("EXTRA_SEX")
         val activityLvl = intent.getStringExtra("EXTRA_ACTIVITY")
-//        val pfp = intent.getParcelableExtra("PFP_IMAGE")
         replaceFragment(Home())
 
-        println(ft)
-        val height:String? = "$ft'$inch"
-        println(height)
+        val height = "$foot'$inches"
         var reset = false
 
-        if(age.isNullOrBlank() || height.isNullOrBlank() || gender.isNullOrBlank() || gender.isNullOrBlank()){
+        if(age.isNullOrBlank() || height.isNullOrBlank() || weight.isNullOrBlank() || sex.isNullOrBlank()){
             // Do not allow for BMR calculation if a field is blank
         }
         else {
@@ -49,7 +46,7 @@ class HomeActivity : AppCompatActivity() {
 
             var finalBMR = 0.0
 
-            finalBMR = if (gender.equals("male")) {
+            finalBMR = if (sex.equals("male")) {
                 //66.47 + (6.24 * lbs) + (12.7 * inch) - (6.75 * age)
                 66.47 + (6.24 * numWeight) + (12.7 * inches) - (6.75 * numAge)
 
@@ -59,13 +56,13 @@ class HomeActivity : AppCompatActivity() {
             }
 
             if(activityLvl.equals("intermediate")) {
-                titleBar.title= "Caloric Intake: " + (finalBMR * 1.55).toString()
+                titleBar.title= "Caloric Intake: " + String.format("%.0f", (finalBMR * 1.55))
             }
             else if(activityLvl.equals("advanced")){
-                titleBar.title= "Caloric Intake: " + (finalBMR * 1.725).toString()
+                titleBar.title= "Caloric Intake: " + String.format("%.0f", (finalBMR * 1.725))
             }
             else{
-                titleBar.title= "Caloric Intake: " + (finalBMR * 1.2).toString()
+                titleBar.title= "Caloric Intake: " + String.format("%.0f", (finalBMR * 1.2))
             }
 
 
@@ -77,9 +74,9 @@ class HomeActivity : AppCompatActivity() {
 
             when(it.itemId){
                 R.id.home -> replaceFragment(Home())
-                R.id.bmr -> replaceFragment(BMR(age, height, weight, gender))
-                R.id.hikes -> replaceFragment(Hikes())
-
+                R.id.bmr -> replaceFragment(BMR(age, height, weight, sex))
+                R.id.hikes -> replaceFragment(Hikes(location))
+                R.id.weather ->replaceFragment((Weather(location)))
                 else ->{}
             }
 
