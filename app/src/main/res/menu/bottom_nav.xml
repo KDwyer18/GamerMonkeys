@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+
+
     <item android:title="Home"
         android:id="@+id/home"
-        android:icon="@drawable/baseline_brightness_1_24"/>
+        android:icon="@drawable/ic_home"/>
     <item android:title="BMR"
         android:id="@+id/bmr"
-        android:icon="@drawable/baseline_square_24" />
+        android:icon="@drawable/ic_bmr"/>
     <item android:title="Hikes"
         android:id="@+id/hikes"
-        android:icon="@drawable/baseline_back_hand_24" />
-
+        android:icon="@drawable/ic_hikes"/>
+    <item android:title="Weather"
+        android:id="@+id/weather"
+        android:icon="@drawable/ic_weather" />
 </menu>
