@@ -6,12 +6,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.core.graphics.drawable.toBitmap
 import com.example.gamermonke.databinding.ActivityRegister2Binding
 
 
 
-private lateinit var binding: ActivityRegister2Binding
+
 class Register2 : AppCompatActivity(){
+
+    private lateinit var binding: ActivityRegister2Binding
 
     private val feetArr = arrayOf("", "1","2","3","4","5","6")
     private val inchesArr = arrayOf("","0", "1","2","3","4","5","6","7","8","9","10","11")
@@ -209,14 +212,32 @@ class Register2 : AppCompatActivity(){
 
     }
 
-//    override fun onClick(p0: View) {
-//        when(p0.id){
-//            R.id.loginButton -> {
-//
-//            }
-//        }
-//    }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("EXTRA_FULLNAME", name)
+        outState.putString("EXTRA_LOCATION", location)
+        outState.putParcelable("PFP_IMAGE", pfp)
+        outState.putString("EXTRA_ACTIVITY", activityVar)
+        outState.putString("EXTRA_SEX", sexVar)
+        outState.putString("EXTRA_AGE", ageVar)
+        outState.putString("EXTRA_FOOT", footVar)
+        outState.putString("EXTRA_INCHES", inchVar)
+        outState.putString("EXTRA_WEIGHT", weightVar)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        name = (savedInstanceState.getString("EXTRA_FULLNAME"))
+        location = (savedInstanceState.getString("EXTRA_LOCATION"))
+        pfp = (savedInstanceState.getParcelable("PFP_IMAGE"))
+        activityVar = (savedInstanceState.getString("EXTRA_ACTIVITY").toString())
+        sexVar = (savedInstanceState.getString("EXTRA_SEX").toString())
+        ageVar = (savedInstanceState.getString("EXTRA_AGE").toString())
+        footVar = (savedInstanceState.getString("EXTRA_FOOT").toString())
+        inchVar = (savedInstanceState.getString("EXTRA_INCHES").toString())
+        weightVar = (savedInstanceState.getString("EXTRA_WEIGHT").toString())
+    }
    
 
 }
