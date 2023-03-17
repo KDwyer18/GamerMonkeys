@@ -12,12 +12,15 @@
         android:layout_height="64dp"
         android:layout_marginStart="310dp"
         android:layout_marginTop="60dp"
+        android:adjustViewBounds="false"
         android:src="@drawable/person_pic"
-        app:civ_border_color="#FF000000"
+        app:civ_border_color="#FFFFFF"
         app:civ_border_width="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="2dp"/>
+
 
     <FrameLayout
         android:id="@+id/frameLayout"
