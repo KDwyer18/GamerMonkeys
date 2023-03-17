@@ -1,9 +1,14 @@
 package com.example.gamermonke
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.graphics.Bitmap
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import android.widget.ImageView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.gamermonke.databinding.ActivityHomeBinding
@@ -15,6 +20,7 @@ private lateinit var binding : ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
 
+    var pfpView: ImageView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
@@ -34,8 +40,8 @@ class HomeActivity : AppCompatActivity() {
         replaceFragment(Home(pfp, name, location, age, sex, weight, height, activityLvl))
         var reset = false
 
-        val pfpView: ImageView = findViewById(R.id.pfpImage)
-        pfpView.setImageBitmap(pfp)
+        pfpView = findViewById(R.id.pfpImage)
+        pfpView!!.setImageBitmap(pfp)
 
         if(age.isNullOrBlank() || height.isNullOrBlank() || sex.isNullOrBlank() || sex.isNullOrBlank()){
 
@@ -77,23 +83,58 @@ class HomeActivity : AppCompatActivity() {
 
         }
 
+        pfpView!!.setOnClickListener {
+            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            try{
+                cameraActivity.launch(cameraIntent)
+            } catch (ex: ActivityNotFoundException){}
+        }
+
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.setOnItemSelectedListener {
 
-            when(it.itemId){
+            when (it.itemId) {
 
-                R.id.home -> replaceFragment(Home(pfp, name, location, age, sex, weight, height, activityLvl))
+                R.id.home -> replaceFragment(
+                    Home(
+                        pfp,
+                        name,
+                        location,
+                        age,
+                        sex,
+                        weight,
+                        height,
+                        activityLvl
+                    )
+                )
                 R.id.bmr -> replaceFragment(BMR(age, height, weight, sex))
                 R.id.hikes -> replaceFragment(Hikes(location))
-                R.id.weather ->replaceFragment((Weather(location)))
+                R.id.weather -> replaceFragment((Weather(location)))
 
-                else ->{}
+                else -> {}
             }
 
             true
         }
 
+    }
+
+    private val cameraActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
+        if(result.resultCode == RESULT_OK) {
+            pfpView = findViewById<View>(R.id.pfpImage) as ImageView
+
+            if (Build.VERSION.SDK_INT >= 33) {
+                val thumbnailImage = result.data!!.getParcelableExtra("data", Bitmap::class.java)
+                pfpView!!.setImageBitmap(thumbnailImage)
+            }
+            else{
+                val thumbnailImage = result.data!!.getParcelableExtra<Bitmap>("data")
+                pfpView!!.setImageBitmap(thumbnailImage)
+            }
+
+
+        }
     }
 
     private fun replaceFragment(fragment : Fragment) {
