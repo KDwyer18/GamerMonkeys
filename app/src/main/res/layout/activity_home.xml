@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/pfpImage"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="310dp"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/person_pic"
+        app:civ_border_color="#FF000000"
+        app:civ_border_width="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
         android:id="@+id/frameLayout"

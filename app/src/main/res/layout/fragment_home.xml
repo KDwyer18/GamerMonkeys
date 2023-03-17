@@ -3,11 +3,257 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:background="@color/seashell"
     tools:context=".Home">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/welcomeText"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_marginTop="60dp"
+        android:textAlignment="center"
+
+        android:text="Welcome"
+        android:textSize="30sp"
+        />
+
+
+    <TextView
+        android:id="@+id/activityLevelText"
+        android:layout_width="180dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="362dp"
+
+        android:layout_marginEnd="16dp"
+        android:contentDescription="activityLevel"
+        android:ems="3"
+        android:hint="Activity Level"
+        android:padding="12dp"
+        android:textColor="#000"
+        android:textColorHint="#D8D4D4"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/sexText"
+        android:layout_width="115dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="257dp"
+        android:layout_marginTop="280dp"
+
+        android:ems="3"
+        android:hint="Sex"
+        android:padding="12dp"
+        android:textColor="#000"
+        android:textColorHint="#D8D4D4"
+        android:textSize="20sp"
+        />
+
+    <TextView
+        android:id="@+id/ageText"
+        android:layout_width="115dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="280dp"
+
+        android:ems="3"
+        android:hint="Age"
+        android:padding="12dp"
+        android:textColor="#000"
+        android:textColorHint="#D8D4D4"
+        android:textSize="20sp"
+        />
+
+    <TextView
+        android:id="@+id/weightText"
+        android:layout_width="115dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="444dp"
+
+        android:ems="3"
+        android:hint="Weight"
+        android:padding="12dp"
+        android:textColor="#000"
+        android:textColorHint="#D8D4D4"
+        android:textSize="20sp"
+        />
+
+    <TextView
+        android:id="@+id/inchText"
+        android:layout_width="115dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="280dp"
+        android:layout_marginTop="444dp"
+
+        android:ems="3"
+        android:hint="Inches"
+        android:padding="12dp"
+        android:textColor="#000"
+        android:textColorHint="#D8D4D4"
+        android:textSize="20sp"
+        />
+
+    <TextView
+        android:id="@+id/footText"
+        android:layout_width="115dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="157dp"
+        android:layout_marginTop="444dp"
+
+        android:ems="3"
+        android:hint="Feet"
+        android:padding="12dp"
+        android:textColor="#000"
+        android:textColorHint="#D8D4D4"
+        android:textSize="20sp"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="117dp"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/fullName"
+                android:layout_width="350dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="32dp"
+                android:ems="10"
+                android:hint="Full Name"
+                android:inputType="textPersonName"
+                android:padding="12dp"
+                android:textColor="#000"
+                android:textColorHint="#D8D4D4"
+                android:textSize="20sp" />
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="32dp"
+            android:orientation="horizontal"
+
+            >
+
+            <EditText
+                android:id="@+id/location"
+                android:layout_width="350dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="32dp"
+                android:ems="10"
+                android:hint="Location"
+                android:inputType="textPersonName"
+                android:padding="12dp"
+                android:textColor="#000"
+                android:textColorHint="#D8D4D4"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="32dp"
+            android:orientation="horizontal">
+
+
+            <Spinner
+                android:id="@+id/ageSpinner"
+                android:layout_width="115dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="32dp"
+
+                android:contentDescription="ageSpinner" />
+
+            <Spinner
+                android:id="@+id/sexSpinner"
+                android:layout_width="115dp"
+                android:layout_height="51dp"
+                android:layout_marginStart="110dp"
+                android:contentDescription="sexSpinner"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/activityLevelSpinner"
+                android:layout_width="180dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="110dp"
+                android:contentDescription="activityLevel" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="32dp"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/weightSpinner"
+                android:layout_width="115dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="32dp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/heightFootSpinner"
+                    android:layout_width="115dp"
+                    android:layout_height="51dp"
+                    android:layout_marginStart="8dp"
+
+                    android:contentDescription="footSpinner" />
+
+                <Spinner
+                    android:id="@+id/heightInchSpinner"
+                    android:layout_width="115dp"
+                    android:layout_height="51dp"
+                    android:layout_marginStart="8dp"
+
+                    android:contentDescription="inchSpinner" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/updateButton"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="32dp"
+
+            android:background="#AAAA"
+            android:padding="12dp"
+
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:text="Update Information"
+            />
+
+    </LinearLayout>
+
+ <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Home Fragment"
@@ -15,6 +261,7 @@
         android:textColor="@color/feldgrau"
         android:fontFamily="sans-serif-medium"
         android:layout_gravity="center" />
+
 
 
 </FrameLayout>
