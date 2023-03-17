@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import org.w3c.dom.Text
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -74,6 +75,8 @@ class Home (in_pfp: Bitmap?, in_name: String?, in_location: String?, in_age: Str
         fragmentView = inflater.inflate(R.layout.fragment_home, container, false)
         thisContext = container!!.context
 
+        println(age)
+
         nameText = fragmentView!!.findViewById(R.id.fullName)
         locationText = fragmentView!!.findViewById(R.id.location)
         activityLevelSpinner= fragmentView!!.findViewById(R.id.activityLevelSpinner)
@@ -87,25 +90,43 @@ class Home (in_pfp: Bitmap?, in_name: String?, in_location: String?, in_age: Str
         nameText!!.setText(name)
         locationText!!.setText(location)
 
+        initializingSpinner(R.id.ageSpinner, ageArr, R.id.ageText, age)
         initializingSpinner(R.id.sexSpinner, sexArr, R.id.sexText, sex)
         initializingSpinner(R.id.weightSpinner, weightArr, R.id.weightText, weight)
         initializingSpinner(R.id.heightFootSpinner, feetArr, R.id.footText, foot)
         initializingSpinner(R.id.heightInchSpinner, inchesArr, R.id.inchText, inch)
         initializingSpinner(R.id.activityLevelSpinner, activityLevelArr, R.id.activityLevelText, activityLevel)
 
-
-//        activityLevelSpinner!!.adapter = ArrayAdapter<String>(thisContext!!, android.R.layout.simple_spinner_dropdown_item, activityLevelArr)
-//        sexSpinner!!.adapter = ArrayAdapter<String>(thisContext!!, android.R.layout.simple_spinner_dropdown_item, sexArr)
-//        ageSpinner!!.adapter = ArrayAdapter<String>(thisContext!!, android.R.layout.simple_spinner_dropdown_item, ageArr)
-//        footSpinner!!.adapter = ArrayAdapter<String>(thisContext!!, android.R.layout.simple_spinner_dropdown_item, feetArr)
-//        inchSpinner!!.adapter = ArrayAdapter<String>(thisContext!!, android.R.layout.simple_spinner_dropdown_item, inchesArr)
-//        weightSpinner!!.adapter = ArrayAdapter<String>(thisContext!!, android.R.layout.simple_spinner_dropdown_item, weightArr)
-//
-        activityLevelSpinner!!.setSelection(activityLevelArr.indexOf( activityLevelArr.first { elem -> elem == activityLevel }))
-
-        println(activityLevelArr.indexOf( activityLevelArr.first { elem -> elem == activityLevel }))
-
-
+        if(!activityLevel.isNullOrEmpty()){
+            val activityLevelText = fragmentView!!.findViewById<TextView>(R.id.activityLevelText)
+            activityLevelText.hint = ""
+            activityLevelText.text = activityLevel
+        }
+        if(!age.isNullOrEmpty()){
+            val ageText = fragmentView!!.findViewById<TextView>(R.id.ageText)
+            ageText.hint = ""
+            ageText.text = age
+        }
+        if(!sex.isNullOrEmpty()){
+            val sexText = fragmentView!!.findViewById<TextView>(R.id.sexText)
+            sexText.hint = ""
+            sexText.text = sex
+        }
+        if(!foot.isNullOrEmpty()){
+            val footText = fragmentView!!.findViewById<TextView>(R.id.footText)
+            footText.hint = ""
+            footText.text = foot
+        }
+        if(!inch.isNullOrEmpty()){
+            val inchText = fragmentView!!.findViewById<TextView>(R.id.inchText)
+            inchText.hint = ""
+            inchText.text = inch
+        }
+        if(!weight.isNullOrEmpty()){
+            val weightText = fragmentView!!.findViewById<TextView>(R.id.weightText)
+            weightText.hint = ""
+            weightText.text = weight
+        }
 
         updateButton!!.setOnClickListener{
             val intent = Intent(thisContext, HomeActivity::class.java)
@@ -115,6 +136,12 @@ class Home (in_pfp: Bitmap?, in_name: String?, in_location: String?, in_age: Str
             if(!locationText!!.text.isNullOrEmpty()){
                 location = locationText!!.text.toString()
             }
+            activityLevel = selectedVal(activityLevelSpinner, activityLevel)
+            sex = selectedVal(sexSpinner, sex)
+            age = selectedVal(ageSpinner, age)
+            foot = selectedVal(footSpinner, foot)
+            inch = selectedVal(inchSpinner, inch)
+            weight = selectedVal(weightSpinner, weight)
 
             intent.putExtra("EXTRA_FULLNAME", name)
             intent.putExtra("EXTRA_LOCATION", location)
@@ -130,15 +157,6 @@ class Home (in_pfp: Bitmap?, in_name: String?, in_location: String?, in_age: Str
 
 
         return fragmentView
-    }
-
-    private fun getIndex(spinner: Spinner, myString: String): Int {
-        for (i in 0 until spinner.count) {
-            if (spinner.getItemAtPosition(i).toString().equals(myString, ignoreCase = true)) {
-                return i
-            }
-        }
-        return 0
     }
 
     private fun initializingSpinner(spinnerID: Int, array: Array<String>, textViewID: Int, tempVar: String?){
@@ -162,6 +180,15 @@ class Home (in_pfp: Bitmap?, in_name: String?, in_location: String?, in_age: Str
 
             }
         }
+    }
+
+    private fun selectedVal(spinner: Spinner?, str: String?): String?{
+        if(spinner!!.selectedItem.toString().isNullOrEmpty()){
+            if(str.isNullOrEmpty())
+                return ""
+            return str
+        }
+        return spinner!!.selectedItem.toString()
     }
 
     companion object {

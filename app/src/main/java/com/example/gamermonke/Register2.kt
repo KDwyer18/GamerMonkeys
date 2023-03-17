@@ -73,9 +73,9 @@ class Register2 : AppCompatActivity(){
         activitySpinnerVal.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 //("Not yet implemented")
-                activitySpinnerVar = activityLevelArr[p2]
+                activityVar = activityLevelArr[p2]
                 val activityText = findViewById<TextView>(R.id.activityLevelText)
-                if(activitySpinnerVar != ""){
+                if(activityVar != ""){
                     activityText.visibility = View.INVISIBLE
                 } else {
                     activityText.visibility = View.VISIBLE
@@ -188,15 +188,6 @@ class Register2 : AppCompatActivity(){
         }
 
         loginButton!!.setOnClickListener{
-            println(name)
-            println(location)
-            println(pfp)
-            println(activityVar)
-            println(sexVar)
-            println(ageVar)
-            println(footVar)
-            println(inchVar)
-            println(weightVar)
             val intent = Intent(this, HomeActivity::class.java)
             intent.putExtra("EXTRA_FULLNAME", name)
             intent.putExtra("EXTRA_LOCATION", location)
