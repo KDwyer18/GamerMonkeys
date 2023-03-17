@@ -12,5 +12,7 @@
     <item android:title="Hikes"
         android:id="@+id/hikes"
         android:icon="@drawable/ic_hikes"/>
-
+    <item android:title="Weather"
+        android:id="@+id/weather"
+        android:icon="@drawable/common_google_signin_btn_text_dark_normal" />
 </menu>
