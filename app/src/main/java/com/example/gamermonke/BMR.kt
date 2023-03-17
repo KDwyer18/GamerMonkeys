@@ -93,7 +93,7 @@ class BMR(in_age: String?, in_height: String?, in_weight: String?, in_gender: St
             }
 
             tvBMRSummary!!.text = ""
-            tvBMR!!.text = finalBMR.toString()
+            tvBMR!!.text = String.format("%.0f", finalBMR)
         }
 
 
@@ -116,15 +116,6 @@ class BMR(in_age: String?, in_height: String?, in_weight: String?, in_gender: St
         fun newInstance(in_age: String, in_height: String, in_weight: String, in_gender: String) =
             BMR(in_age, in_height, in_weight, in_gender).apply {
                 arguments = Bundle().apply {
-//                    putString(USER_AGE, age)
-//                    putString(USER_HEIGHT, height)
-//                    putString(USER_WEIGHT, weight)
-//                    putString(USER_GENDER, gender)
-//
-//                    age = in_age
-//                    height = in_height
-//                    weight = in_weight
-//                    gender = in_gender
                 }
             }
     }
