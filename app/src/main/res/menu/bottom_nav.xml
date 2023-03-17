@@ -14,5 +14,5 @@
         android:icon="@drawable/ic_hikes"/>
     <item android:title="Weather"
         android:id="@+id/weather"
-        android:icon="@drawable/info" />
+        android:icon="@drawable/ic_weather" />
 </menu>

@@ -82,7 +82,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:hint="Location"
+        android:hint="Location (City, Country)"
         android:inputType="textPersonName"
         android:padding="12dp"
         android:textColor="#000"
