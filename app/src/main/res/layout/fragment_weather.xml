@@ -111,7 +111,7 @@
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:src="@drawable/sunrise"
+                        android:src="@drawable/pressure"
                         app:tint="#FFFFFF">
 
                     </ImageView>
@@ -124,15 +124,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
-                        android:text="Sunrise">
+                        android:text="Pressure">
 
                     </TextView>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/sunrise"
+                        android:id="@+id/pressure"
                         android:textSize="14sp"
-                        android:text="5:00AM">
+                        android:text="120">
 
                     </TextView>
 
@@ -153,7 +153,7 @@
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:src="@drawable/sunset"
+                        android:src="@drawable/humidity"
                         app:tint="#FFFFFF">
 
                     </ImageView>
@@ -166,15 +166,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
-                        android:text="Sunset">
+                        android:text="Humidity">
 
                     </TextView>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/sunset"
+                        android:id="@+id/humidity"
                         android:textSize="14sp"
-                        android:text="7:00PM">
+                        android:text="10">
 
                     </TextView>
 
@@ -236,39 +236,44 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="3">
+
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="171dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_weight="1"
+                    android:background="#3CF1EBF1"
                     android:gravity="center"
-                    android:padding="8dp"
-                    android:background="#3CF1EBF1">
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:src="@drawable/pressure"
+                        android:src="@drawable/sunrise"
                         app:tint="#FFFFFF">
 
                     </ImageView>
+
                     <Space
                         android:layout_width="wrap_content"
                         android:layout_height="5dp">
 
                     </Space>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="12sp"
-                        android:text="Pressure">
+                        android:text="Sunrise"
+                        android:textSize="12sp">
 
                     </TextView>
+
                     <TextView
+                        android:id="@+id/sunrise"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/pressure"
-                        android:textSize="14sp"
-                        android:text="5:00AM">
+                        android:text="5:00AM"
+                        android:textSize="14sp">
 
                     </TextView>
 
@@ -278,85 +283,90 @@
                     android:layout_height="wrap_content">
 
                 </Space>
+
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="171dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_weight="1"
+                    android:background="#3CF1EBF1"
                     android:gravity="center"
-                    android:padding="8dp"
-                    android:background="#3CF1EBF1">
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:src="@drawable/humidity"
+                        android:src="@drawable/sunset"
                         app:tint="#FFFFFF">
 
                     </ImageView>
+
                     <Space
                         android:layout_width="wrap_content"
                         android:layout_height="5dp">
 
                     </Space>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="12sp"
-                        android:text="Humidity">
 
-                    </TextView>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/humidity"
-                        android:textSize="14sp"
-                        android:text="5:00AM">
+                        android:text="Sunset"
+                        android:textSize="12sp">
 
                     </TextView>
 
-                </LinearLayout>
-                <Space
-                    android:layout_width="10dp"
-                    android:layout_height="wrap_content">
-
-                </Space>
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:background="#3CF1EBF1">
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/info"
-                        app:tint="#FFFFFF">
-
-                    </ImageView>
-                    <Space
-                        android:layout_width="wrap_content"
-                        android:layout_height="5dp">
-
-                    </Space>
                     <TextView
+                        android:id="@+id/sunset"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="12sp"
-                        android:text="Miscellaneous">
-
-                    </TextView>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/info"
-                        android:textSize="14sp"
-                        >
+                        android:text="7:00PM"
+                        android:textSize="14sp">
 
                     </TextView>
 
                 </LinearLayout>
+                <!--                <Space-->
+                <!--                    android:layout_width="10dp"-->
+                <!--                    android:layout_height="wrap_content">-->
+
+                <!--                </Space>-->
+                <!--                <LinearLayout-->
+                <!--                    android:layout_width="0dp"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:orientation="vertical"-->
+                <!--                    android:layout_weight="1"-->
+                <!--                    android:gravity="center"-->
+                <!--                    android:padding="8dp"-->
+                <!--                    android:background="#3CF1EBF1">-->
+                <!--                    <ImageView-->
+                <!--                        android:layout_width="25dp"-->
+                <!--                        android:layout_height="25dp"-->
+                <!--                        android:src="@drawable/info"-->
+                <!--                        app:tint="#FFFFFF">-->
+
+                <!--                    </ImageView>-->
+                <!--                    <Space-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="5dp">-->
+
+                <!--                    </Space>-->
+                <!--                    <TextView-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:textSize="12sp"-->
+                <!--                        android:text="Miscellaneous">-->
+
+                <!--                    </TextView>-->
+                <!--                    <TextView-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:id="@+id/info"-->
+                <!--                        android:textSize="14sp"-->
+                <!--                        >-->
+
+                <!--                    </TextView>-->
+
+                <!--                </LinearLayout>-->
                 <Space
                     android:layout_width="10dp"
                     android:layout_height="wrap_content">

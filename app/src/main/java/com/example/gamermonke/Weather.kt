@@ -16,27 +16,25 @@ import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val ARG_LOCATION = "location"
 
 /**
  * A simple [Fragment] subclass.
  * Use the [Weather.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Weather : Fragment() {
+class Weather(in_location: String?) : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
-    val city_name: String = "Salt Lake City, USA"
+    private var location: String? = in_location
     val API: String = "9ff22c60ea17c990ff4447c2d37d14d4"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            location = it.getString(ARG_LOCATION)
         }
     }
     override fun onCreateView(
@@ -44,9 +42,9 @@ class Weather : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        if(location.isNullOrBlank())
+            location = "Salt Lake City, Utah"
         val fragmentView = inflater.inflate(R.layout.fragment_weather, container, false)
-
-
         class weatherTask() : AsyncTask<String, Void, String>()
         {
             override fun onPreExecute() {
@@ -58,7 +56,7 @@ class Weather : Fragment() {
             override fun doInBackground(vararg p0: String?): String? {
                 var response:String?
                 try {
-                    response = URL("https://api.openweathermap.org/data/2.5/weather?q=$city_name&units=metric&appid=$API")
+                    response = URL("https://api.openweathermap.org/data/2.5/weather?q=$location&units=metric&appid=$API")
                         .readText(Charsets.UTF_8)
                 }
                 catch (e: Exception)
@@ -127,11 +125,10 @@ class Weather : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Weather().apply {
+        fun newInstance(in_location: String?) =
+            Weather(in_location).apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putString(ARG_LOCATION, in_location)
                 }
             }
     }
