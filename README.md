@@ -2,13 +2,18 @@
 
 # Aisha Khan   #   Cameron Hanney   #   Kevin Dwyer   #   Nick Waddoups
 
-Functionality Features to Implement:
-  1. Store name, age, location (city and country), height, weight, sex, and “activity level”, and store a full profile picture for me.
-  2. BMR Calculator: Needs age, sex, height, and weight
-  
-  
-Design Features to Implement:
+Design Features Implemented:
   1. Stylish buttons
   2. Functional rotation
   3. Required naming field
   4. View profile summary
+  5. Effcient for more modules
+  6. Ability to Login
+  7. The app looks apealling 
+  10. The name is the only required edit text
+  11. Ability to see summary of edited data
+  
+  8. Partially done. Not able to rotate after login steps, but able to open and close app without issues
+  9. Partially done. Other than the issues with rotating on fragments the code has been well tested.
+  
+  
