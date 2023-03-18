@@ -75,6 +75,7 @@ class HomeActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.home -> replaceFragment(Home())
                 R.id.bmr -> replaceFragment(BMR(age, height, weight, sex))
+                R.id.weather -> replaceFragment(Weather())
                 R.id.hikes -> replaceFragment(Hikes(location))
 
                 else ->{}

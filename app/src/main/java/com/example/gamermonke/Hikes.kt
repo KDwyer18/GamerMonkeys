@@ -48,8 +48,6 @@ class Hikes(in_location: String?) : Fragment() {
         var address = addresses?.get(0)
         val lat = address?.latitude
         val lon = address?.longitude
-
-//        val searchUri = Uri.parse("geo:40.767778, -111.845205?q=hikes")
         val searchUri = Uri.parse("geo:$lat, $lon?q=hikes")
         val mapIntent = Intent(Intent.ACTION_VIEW, searchUri)
         mapIntent.setPackage("com.google.android.apps.maps")

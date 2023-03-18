@@ -208,15 +208,4 @@ class Register2 : AppCompatActivity(){
         }
 
     }
-
-//    override fun onClick(p0: View) {
-//        when(p0.id){
-//            R.id.loginButton -> {
-//
-//            }
-//        }
-//    }
-
-   
-
 }
