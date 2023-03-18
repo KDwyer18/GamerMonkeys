@@ -36,11 +36,12 @@ class BMR(in_age: String?, in_height: String?, in_weight: String?, in_gender: St
     private var tvBMRSummary: TextView? = null
     private var tvBMR: TextView? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
 
-//            age = it.getString(USER_AGE)
+//            age = it.getStringExtra(USER_AGE)
 //            weight = it.getString(USER_WEIGHT)
 //            height = it.getString(USER_HEIGHT)
 //            gender = it.getString(USER_GENDER)
@@ -116,7 +117,33 @@ class BMR(in_age: String?, in_height: String?, in_weight: String?, in_gender: St
         fun newInstance(in_age: String, in_height: String, in_weight: String, in_gender: String) =
             BMR(in_age, in_height, in_weight, in_gender).apply {
                 arguments = Bundle().apply {
+                    val feetInch = height!!.split("\'")
+                    putString("EXTRA_AGE", age)
+                    putString("EXTRA_FOOT", feetInch[0])
+                    putString("EXTRA_INCHES", feetInch[1])
+                    putString("EXTRA_WEIGHT", weight)
+                    putString("EXTRA_GENDER", gender)
                 }
             }
     }
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        val feetInch = height!!.split("\'")
+        outState.putString("EXTRA_AGE", age)
+        outState.putString("EXTRA_FOOT", feetInch[0])
+        outState.putString("EXTRA_INCHES", feetInch[1])
+        outState.putString("EXTRA_WEIGHT", weight)
+        outState.putString("EXTRA_GENDER", gender)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        age = savedInstanceState?.getString("EXTRA_AGE")
+        val foot = savedInstanceState?.getString("EXTRA_FOOT")
+        val inch = savedInstanceState?.getString("EXTRA_INCHES")
+        height = "$foot'$inch"
+        weight = savedInstanceState?.getString("EXTRA_WEIGHT")
+        gender = savedInstanceState?.getString("EXTRA_GENDER")
+    }
+
 }

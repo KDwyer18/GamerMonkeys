@@ -81,4 +81,9 @@ class Hikes(in_location: String?) : Fragment() {
                 }
             }
     }
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("location", location)
+    }
+
 }

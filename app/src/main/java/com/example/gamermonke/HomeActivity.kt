@@ -2,6 +2,7 @@ package com.example.gamermonke
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -15,21 +16,42 @@ private lateinit var binding : ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
 
+    private var weatherFragment: Fragment? = null
+    private var BMRFragment: Fragment? = null
+    private var homeFragment: Fragment? = null
+    private var name: String? = null
+    private var pfp:Bitmap? = null
+    private var location:String? = ""
+    private var activityLvl: String? = null
+    private var sex: String? = null
+    private var age: String? = null
+    private var ft: String? = null
+    private var inch: String? = null
+    private var weight: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_home)
 
-        val name = intent.getStringExtra("EXTRA_FULLNAME")
-        val location = intent.getStringExtra("EXTRA_LOCATION")
-        val age = intent.getStringExtra("EXTRA_AGE")
-        val ft = intent.getStringExtra("EXTRA_FOOT")
-        val inch = intent.getStringExtra("EXTRA_INCHES")
-        val weight = intent.getStringExtra("EXTRA_WEIGHT")
-        val sex = intent.getStringExtra("EXTRA_SEX")
-        val activityLvl = intent.getStringExtra("EXTRA_ACTIVITY")
-        var pfp: Bitmap? = intent.getParcelableExtra("PFP_IMAGE")
-
+        name = intent.getStringExtra("EXTRA_FULLNAME")
+        location = intent.getStringExtra("EXTRA_LOCATION")
+        age = intent.getStringExtra("EXTRA_AGE")
+        ft = intent.getStringExtra("EXTRA_FOOT")
+        inch = intent.getStringExtra("EXTRA_INCHES")
+        weight = intent.getStringExtra("EXTRA_WEIGHT")
+        sex = intent.getStringExtra("EXTRA_SEX")
+        activityLvl = intent.getStringExtra("EXTRA_ACTIVITY")
+        pfp = intent.getParcelableExtra("PFP_IMAGE")
+        if(savedInstanceState != null) {
+            weatherFragment = supportFragmentManager.findFragmentByTag("weather_fragment")
+        }
+        else {
+            weatherFragment = Weather(location)
+            val fTrans = supportFragmentManager.beginTransaction()
+            fTrans.replace(R.id.weather, weatherFragment as Weather, "weather_fragment")
+            fTrans.commit()
+        }
         val height:String? = "$ft'$inch"
         replaceFragment(Home(pfp, name, location, age, sex, weight, height, activityLvl))
         var reset = false
@@ -95,11 +117,23 @@ class HomeActivity : AppCompatActivity() {
         }
 
     }
-
     private fun replaceFragment(fragment : Fragment) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frameLayout, fragment)
         fragmentTransaction.commit()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("EXTRA_FULLNAME", name)
+        outState.putString("EXTRA_LOCATION", location)
+        outState.putParcelable("PFP_IMAGE", pfp)
+        outState.putString("EXTRA_ACTIVITY", activityLvl)
+        outState.putString("EXTRA_SEX", sex)
+        outState.putString("EXTRA_AGE", age)
+        outState.putString("EXTRA_FOOT", ft)
+        outState.putString("EXTRA_INCHES", inch)
+        outState.putString("EXTRA_WEIGHT", weight)
     }
 }
