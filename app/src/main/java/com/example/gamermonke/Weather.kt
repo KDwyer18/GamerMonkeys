@@ -23,12 +23,10 @@ private const val ARG_LOCATION = "location"
  * Use the [Weather.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Weather(in_location: String?) : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class Weather() : Fragment() {
 
-    private var location: String? = in_location
+//    private var location: String? = in_location
+    private var location: String? = ""
     val API: String = "9ff22c60ea17c990ff4447c2d37d14d4"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -126,9 +124,10 @@ class Weather(in_location: String?) : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(in_location: String?) =
-            Weather(in_location).apply {
+            Weather().apply {
                 arguments = Bundle().apply {
                     putString(ARG_LOCATION, in_location)
+                    location = in_location
                 }
             }
     }

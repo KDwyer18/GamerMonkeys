@@ -1,11 +1,14 @@
 package com.example.gamermonke
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 
 
@@ -24,33 +27,24 @@ private val layoutManager: RecyclerView.LayoutManager? = null
  * Use the [BMR.newInstance] factory method to
  * create an instance of this fragment.
  */
-class BMR(in_age: String?, in_height: String?, in_weight: String?, in_gender: String?) : Fragment() {
 
-    private var age: String? = in_age
-    private var height: String? = in_height
-    private var weight: String? = in_weight
-    private var gender: String? = in_gender
+class BMR() : Fragment() {
+
+    private var age: String? = ""
+    private var height: String? = ""
+    private var weight: String? = ""
+    private var gender: String? = ""
     private var reset: Boolean = false
+    var fBMR: Double = 0.0
 
     // To be filled text fields:
     private var tvBMRSummary: TextView? = null
     private var tvBMR: TextView? = null
+    private var mBMRViewModel: BMRViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-
-//            age = it.getString(USER_AGE)
-//            weight = it.getString(USER_WEIGHT)
-//            height = it.getString(USER_HEIGHT)
-//            gender = it.getString(USER_GENDER)
-//
-//            if(age.isNullOrBlank() || height.isNullOrBlank() || weight.isNullOrBlank() || gender.isNullOrBlank()){
-//                // Do not allow for BMR calculation if a field is blank
-//            }
-//            else {
-//                reset = true
-//            }
 
         }
     }
@@ -60,6 +54,11 @@ class BMR(in_age: String?, in_height: String?, in_weight: String?, in_gender: St
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
+        // Construct and call the ViewModel, set observer
+        mBMRViewModel = ViewModelProvider(this)[BMRViewModel::class.java]
+        mBMRViewModel!!.data.observe(viewLifecycleOwner, bmrObserver)
+
 
         val fragmentView = inflater.inflate(R.layout.fragment_b_m_r, container, false)
 
@@ -91,7 +90,8 @@ class BMR(in_age: String?, in_height: String?, in_weight: String?, in_gender: St
                 // 65.51 + (4.35 * lbs) + (4.70 * inch) - (4.70 * age)
                 finalBMR = 65.51 + (4.35 * numWeight) + (4.7 * inches) - (4.70 * numAge)
             }
-
+            fBMR = finalBMR
+            mBMRViewModel!!.setBMR(finalBMR)
             tvBMRSummary!!.text = ""
             tvBMR!!.text = String.format("%.0f", finalBMR)
         }
@@ -99,6 +99,14 @@ class BMR(in_age: String?, in_height: String?, in_weight: String?, in_gender: St
 
         return fragmentView
     }
+
+    private val bmrObserver: Observer<BMR> =
+        Observer { bmrData ->
+            if (bmrData != null) {
+                tvBMRSummary!!.text = ""
+                tvBMR!!.text = String.format("%.0f", bmrData.fBMR)
+            }
+        }
 
     companion object {
         /**
@@ -113,10 +121,20 @@ class BMR(in_age: String?, in_height: String?, in_weight: String?, in_gender: St
          * @return A new instance of fragment BMR.
          */
         @JvmStatic
-        fun newInstance(in_age: String, in_height: String, in_weight: String, in_gender: String) =
-            BMR(in_age, in_height, in_weight, in_gender).apply {
+        fun newInstance(in_age: String?, in_height: String?, in_weight: String?, in_gender: String?) =
+            BMR().apply {
                 arguments = Bundle().apply {
+                    age = in_age
+                    height = in_height
+                    weight = in_weight
+                    gender = in_gender
+
+                    putString(age, in_age)
+                    putString(height, in_height)
+                    putString(weight, in_weight)
+                    putString(gender, in_gender)
                 }
             }
+
     }
 }

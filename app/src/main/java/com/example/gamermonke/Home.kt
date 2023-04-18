@@ -22,17 +22,28 @@ private const val ARG_PARAM2 = "param2"
  * Use the [Home.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Home (in_pfp: Bitmap?, in_name: String?, in_location: String?, in_age: String?, in_sex: String?, in_weight: String?, in_height: String?, in_activityLevel: String?) : Fragment() {
-    private var pfp: Bitmap? = in_pfp
-    private var name: String? = in_name
-    private var location: String? = in_location
-    private var age: String? = in_age
-    private var sex: String? = in_sex
-    private var weight: String? = in_weight
-    private var height: String? = in_height
+class Home () : Fragment() {
+//    private var pfp: Bitmap? = in_pfp
+//    private var name: String? = in_name
+//    private var location: String? = in_location
+//    private var age: String? = in_age
+//    private var sex: String? = in_sex
+//    private var weight: String? = in_weight
+//    private var height: String? = in_height
+//    private var foot: String? = null
+//    private var inch: String? = null
+//    private var activityLevel: String? = in_activityLevel
+
+    private var pfp: Bitmap? = null
+    private var name: String? = ""
+    private var location: String? = ""
+    private var age: String? = ""
+    private var sex: String? = ""
+    private var weight: String? = ""
+    private var height: String? = ""
     private var foot: String? = null
     private var inch: String? = null
-    private var activityLevel: String? = in_activityLevel
+    private var activityLevel: String? = ""
 
     private val feetArr = arrayOf("", "1","2","3","4","5","6")
     private val inchesArr = arrayOf("","0", "1","2","3","4","5","6","7","8","9","10","11")
@@ -62,8 +73,15 @@ class Home (in_pfp: Bitmap?, in_name: String?, in_location: String?, in_age: Str
 
         ageArr = ageArr.plus(intAges.map { it.toString() }.toTypedArray())
         weightArr = weightArr.plus(intWeight.map { it.toString() }.toTypedArray())
-        foot = height!!.split("\'")[0]
-        inch = height!!.split("\'")[1]
+        if (height == ""){
+            foot = ""
+            inch = ""
+        }
+        else {
+            foot = height!!.split("\'")[0]
+            inch = height!!.split("\'")[1]
+        }
+
 
     }
 
@@ -202,10 +220,19 @@ class Home (in_pfp: Bitmap?, in_name: String?, in_location: String?, in_age: Str
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(in_pfp: Bitmap, in_name: String?, in_location: String?, in_age: String?, in_sex: String?, in_weight: String?, in_height: String?, in_activityLevel: String?) =
-            Home(in_pfp, in_name, in_location, in_age, in_sex, in_weight, in_height, in_activityLevel).apply {
+        fun newInstance(in_pfp: Bitmap?, in_name: String?, in_location: String?, in_age: String?, in_sex: String?, in_weight: String?, in_height: String?, in_activityLevel: String?) =
+            Home().apply {
                 arguments = Bundle().apply {
-
+                    pfp = in_pfp
+                    name = in_name
+                    location = in_location
+                    age = in_age
+                    sex = in_sex
+                    weight = in_weight
+                    height = in_height
+                    foot = null
+                    inch = null
+                    activityLevel = in_activityLevel
                 }
             }
     }

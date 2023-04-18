@@ -23,8 +23,9 @@ private const val ARG_LOCATION = "location"
  * Use the [Hikes.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Hikes(in_location: String?) : Fragment() {
-    private var location: String? = in_location
+class Hikes() : Fragment() {
+//    private var location: String? = in_location
+    private var location: String? = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -75,9 +76,10 @@ class Hikes(in_location: String?) : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(in_location: String?) =
-            Hikes(in_location).apply {
+            Hikes().apply {
                 arguments = Bundle().apply {
                     putString(ARG_LOCATION, in_location)
+                    location = in_location
                 }
             }
     }
