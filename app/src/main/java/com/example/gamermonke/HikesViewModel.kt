@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
-class BMRViewModel(app: Application) : AndroidViewModel(app) {
+class HikesViewModel(app: Application) : AndroidViewModel(app) {
     private val bmrData = MutableLiveData<BMR>()
     private var bmrVal = 0.0
 
@@ -19,6 +19,4 @@ class BMRViewModel(app: Application) : AndroidViewModel(app) {
 
     val data: LiveData<BMR>
         get() = bmrData
-
 }
-
