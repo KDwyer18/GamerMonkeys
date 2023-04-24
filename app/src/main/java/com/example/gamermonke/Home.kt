@@ -23,16 +23,6 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class Home () : Fragment() {
-//    private var pfp: Bitmap? = in_pfp
-//    private var name: String? = in_name
-//    private var location: String? = in_location
-//    private var age: String? = in_age
-//    private var sex: String? = in_sex
-//    private var weight: String? = in_weight
-//    private var height: String? = in_height
-//    private var foot: String? = null
-//    private var inch: String? = null
-//    private var activityLevel: String? = in_activityLevel
 
     private var pfp: Bitmap? = null
     private var name: String? = ""

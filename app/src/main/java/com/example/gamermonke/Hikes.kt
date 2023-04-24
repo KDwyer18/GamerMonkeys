@@ -12,9 +12,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import java.net.URL
 
-// TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_LOCATION = "location"
 
@@ -24,8 +25,11 @@ private const val ARG_LOCATION = "location"
  * create an instance of this fragment.
  */
 class Hikes() : Fragment() {
-//    private var location: String? = in_location
-    private var location: String? = ""
+    var location: String? = ""
+
+    // For the ViewModel
+    private var mHikesViewModel: HikesViewModel? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -37,10 +41,16 @@ class Hikes() : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        // Construct and call the ViewModel, set observer
+        mHikesViewModel = ViewModelProvider(this)[HikesViewModel::class.java]
+        mHikesViewModel!!.data.observe(viewLifecycleOwner, hikesObserver)
+
         // Inflate the layout for this fragment
         if(location.isNullOrBlank())
             location = "Salt Lake City, Utah"
 
+        mHikesViewModel!!.setLocation(location!!)
 
         val geocoder = Geocoder(this.requireContext())
         var error = ""
@@ -50,7 +60,6 @@ class Hikes() : Fragment() {
         val lat = address?.latitude
         val lon = address?.longitude
 
-//        val searchUri = Uri.parse("geo:40.767778, -111.845205?q=hikes")
         val searchUri = Uri.parse("geo:$lat, $lon?q=hikes")
         val mapIntent = Intent(Intent.ACTION_VIEW, searchUri)
         mapIntent.setPackage("com.google.android.apps.maps")
@@ -63,7 +72,12 @@ class Hikes() : Fragment() {
         return inflater.inflate(R.layout.fragment_map, container, false)
     }
 
-
+    private val hikesObserver: Observer<Hikes> =
+        Observer { hikesData ->
+            if (hikesData != null) {
+                location = hikesData.location
+            }
+        }
 
     companion object {
         /**

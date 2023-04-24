@@ -11,7 +11,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 
-
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val USER_AGE = "age"
 private const val USER_WEIGHT = "weight"
@@ -40,6 +39,8 @@ class BMR() : Fragment() {
     // To be filled text fields:
     private var tvBMRSummary: TextView? = null
     private var tvBMR: TextView? = null
+
+    // For the ViewModel
     private var mBMRViewModel: BMRViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
