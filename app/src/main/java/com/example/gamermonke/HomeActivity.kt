@@ -11,6 +11,8 @@ import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.gamermonke.databinding.ActivityHomeBinding
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -21,6 +23,7 @@ private lateinit var binding : ActivityHomeBinding
 class HomeActivity : AppCompatActivity() {
 
     var pfpView: ImageView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
@@ -37,7 +40,7 @@ class HomeActivity : AppCompatActivity() {
         var pfp: Bitmap? = intent.getParcelableExtra("PFP_IMAGE")
 
         val height:String? = "$ft'$inch"
-        replaceFragment(Home(pfp, name, location, age, sex, weight, height, activityLvl))
+        replaceFragment(Home.newInstance(pfp, name, location, age, sex, weight, height, activityLvl))
         var reset = false
 
         pfpView = findViewById(R.id.pfpImage)
@@ -97,7 +100,7 @@ class HomeActivity : AppCompatActivity() {
             when (it.itemId) {
 
                 R.id.home -> replaceFragment(
-                    Home(
+                    Home.newInstance(
                         pfp,
                         name,
                         location,
@@ -108,9 +111,10 @@ class HomeActivity : AppCompatActivity() {
                         activityLvl
                     )
                 )
-                R.id.bmr -> replaceFragment(BMR(age, height, weight, sex))
-                R.id.hikes -> replaceFragment(Hikes(location))
-                R.id.weather -> replaceFragment((Weather(location)))
+
+                R.id.bmr -> replaceFragment(BMR.newInstance(age, height, weight, sex))
+                R.id.hikes -> replaceFragment(Hikes.newInstance(location))
+                R.id.weather -> replaceFragment(Weather.newInstance(location))
 
                 else -> {}
             }

@@ -12,9 +12,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import java.net.URL
 
-// TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_LOCATION = "location"
 
@@ -23,8 +24,12 @@ private const val ARG_LOCATION = "location"
  * Use the [Hikes.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Hikes(in_location: String?) : Fragment() {
-    private var location: String? = in_location
+class Hikes() : Fragment() {
+    var location: String? = ""
+
+    // For the ViewModel
+    private var mHikesViewModel: HikesViewModel? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -36,10 +41,16 @@ class Hikes(in_location: String?) : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        // Construct and call the ViewModel, set observer
+        mHikesViewModel = ViewModelProvider(this)[HikesViewModel::class.java]
+        mHikesViewModel!!.data.observe(viewLifecycleOwner, hikesObserver)
+
         // Inflate the layout for this fragment
         if(location.isNullOrBlank())
             location = "Salt Lake City, Utah"
 
+        mHikesViewModel!!.setLocation(location!!)
 
         val geocoder = Geocoder(this.requireContext())
         var error = ""
@@ -49,7 +60,6 @@ class Hikes(in_location: String?) : Fragment() {
         val lat = address?.latitude
         val lon = address?.longitude
 
-//        val searchUri = Uri.parse("geo:40.767778, -111.845205?q=hikes")
         val searchUri = Uri.parse("geo:$lat, $lon?q=hikes")
         val mapIntent = Intent(Intent.ACTION_VIEW, searchUri)
         mapIntent.setPackage("com.google.android.apps.maps")
@@ -62,7 +72,12 @@ class Hikes(in_location: String?) : Fragment() {
         return inflater.inflate(R.layout.fragment_map, container, false)
     }
 
-
+    private val hikesObserver: Observer<Hikes> =
+        Observer { hikesData ->
+            if (hikesData != null) {
+                location = hikesData.location
+            }
+        }
 
     companion object {
         /**
@@ -75,9 +90,10 @@ class Hikes(in_location: String?) : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(in_location: String?) =
-            Hikes(in_location).apply {
+            Hikes().apply {
                 arguments = Bundle().apply {
                     putString(ARG_LOCATION, in_location)
+                    location = in_location
                 }
             }
     }
