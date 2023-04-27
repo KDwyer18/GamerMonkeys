@@ -1,5 +1,6 @@
 package com.example.gamermonke
 
+import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,19 +11,35 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import java.util.*
 
 private const val ARG_LOCATION = "location"
 class Weather : Fragment() {
+    var location: String? = ""
 
     private val viewModel: WeatherViewModel by lazy {
         ViewModelProvider(this).get(WeatherViewModel::class.java)
+    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            location = it.getString(ARG_LOCATION)
+        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_weather, container, false)
+        // Inflate the layout for this fragment
+        if(location.isNullOrBlank())
+            location = "Salt Lake City, Utah"
+        viewModel!!.setLocation(location!!)
+        val fragmentView = inflater.inflate(R.layout.fragment_weather, container, false)
+        viewModel.getWeather(location!!).observe(viewLifecycleOwner, Observer { weatherData ->
+            showWeatherData(weatherData)
+        })
+        return fragmentView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,11 +50,11 @@ class Weather : Fragment() {
         requireView().findViewById<TextView>(R.id.address).text = weather.address
         requireView().findViewById<TextView>(R.id.tv_updated_time).text = weather.updatedAtText
         requireView().findViewById<TextView>(R.id.status).text = weather.status.capitalize()
-        requireView().findViewById<TextView>(R.id.temp).text = "${weather.temp}°C"
-        requireView().findViewById<TextView>(R.id.tv_min_temp).text = "Min Temp: ${weather.tempMin}°C"
-        requireView().findViewById<TextView>(R.id.tv_max_temp).text = "Max Temp: ${weather.tempMax}°C"
-        requireView().findViewById<TextView>(R.id.sunrise).text = weather.sunrise.toString()
-        requireView().findViewById<TextView>(R.id.sunset).text = weather.sunset.toString()
+        requireView().findViewById<TextView>(R.id.temp).text = "${weather.temp}"
+        requireView().findViewById<TextView>(R.id.tv_min_temp).text = "${weather.tempMin}"
+        requireView().findViewById<TextView>(R.id.tv_max_temp).text = "${weather.tempMax}"
+        requireView().findViewById<TextView>(R.id.sunrise).text = SimpleDateFormat("hh:mm a", Locale.US).format(Date(weather.sunrise * 1000))
+        requireView().findViewById<TextView>(R.id.sunset).text = SimpleDateFormat("hh:mm a", Locale.US).format(Date(weather.sunset * 1000))
         requireView().findViewById<TextView>(R.id.wind).text = "${weather.windSpeed} m/s"
         requireView().findViewById<TextView>(R.id.pressure).text = "${weather.pressure} hPa"
         requireView().findViewById<TextView>(R.id.humidity).text = "${weather.humidity}%"
@@ -47,10 +64,11 @@ class Weather : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(location: String?) =
+        fun newInstance(in_location: String?) =
             Weather().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_LOCATION, location)
+                    putString(ARG_LOCATION, in_location)
+                    location = in_location
                 }
             }
     }
