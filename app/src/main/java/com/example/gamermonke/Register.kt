@@ -11,7 +11,11 @@ import android.view.View
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.graphics.drawable.toBitmap
+import androidx.room.*
+import androidx.room.RoomDatabase
 import com.example.gamermonke.databinding.ActivityRegisterBinding
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 
 
 class Register : AppCompatActivity(), View.OnClickListener {
@@ -25,6 +29,11 @@ class Register : AppCompatActivity(), View.OnClickListener {
     private var loginButton: Button? = null
 
     private var pfpView: ImageView? = null
+    var db: RoomDatabase? = null
+
+//    private val mUserViewModel: MainViewModel by viewModels {
+//        UserViewModelFactory((application as UserApplication).repository)
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,11 +53,22 @@ class Register : AppCompatActivity(), View.OnClickListener {
         when (p0.id) {
             R.id.loginButton -> {
                 if (!loginButton!!.text.toString().isNullOrEmpty()) {
-                    val intent = Intent(this, Register2::class.java)
-                    intent.putExtra("EXTRA_FULLNAME", fullName!!.text.toString())
-                    intent.putExtra("EXTRA_LOCATION", userLocation!!.text.toString())
-                    intent.putExtra("PFP_IMAGE", pfpView!!.drawable.toBitmap())
-                    startActivity(intent)
+
+//                    var names = mUserViewModel.allNames
+
+
+//                        var user: UserData? = UserData()
+//                        user!!.name = fullName!!.text.toString()
+//                        user!!.location = userLocation!!.text.toString()
+//                        //user!!.pfp = pfpView!!.drawable.toBitmap()
+//                        mUserViewModel.setUserData(user)
+                        val intent = Intent(this, Register2::class.java)
+                        intent.putExtra("EXTRA_FULLNAME", fullName!!.text.toString())
+                        intent.putExtra("EXTRA_LOCATION", userLocation!!.text.toString())
+                        intent.putExtra("PFP_IMAGE", pfpView!!.drawable.toBitmap())
+                        startActivity(intent)
+
+
                 } else {
                     Toast.makeText(
                         applicationContext,

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.room.*
 import org.w3c.dom.Text
 
 
@@ -73,6 +74,8 @@ class Home () : Fragment() {
         }
 
 
+
+
     }
 
     override fun onCreateView(
@@ -82,8 +85,6 @@ class Home () : Fragment() {
         // Inflate the layout for this fragment
         fragmentView = inflater.inflate(R.layout.fragment_home, container, false)
         thisContext = container!!.context
-
-        println(age)
 
         nameText = fragmentView!!.findViewById(R.id.fullName)
         locationText = fragmentView!!.findViewById(R.id.location)
