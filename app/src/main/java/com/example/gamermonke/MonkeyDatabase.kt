@@ -7,7 +7,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [User::class], version = 1)
+@Database(entities = [UserData::class], version = 1, exportSchema = false)
 abstract class MonkeyDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
 
@@ -46,9 +46,9 @@ abstract class MonkeyDatabase : RoomDatabase() {
                 }
             }
         }
-
+        //User("superguy", 1000.0, 6, 6, "male", 40, "intermediate", "slc, utah", 150.0)
         suspend fun populateDbTask (userDao: UserDao) {
-            userDao.insert(User("superguy", 1000.0, 6, 6, "male", 40, "intermediate", "slc, utah", 150.0))
+            userDao.insert(UserData())
         }
     }
 }

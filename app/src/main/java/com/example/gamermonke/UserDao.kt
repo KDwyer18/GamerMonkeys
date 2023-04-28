@@ -5,14 +5,14 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface UserDao {
-    @Query("SELECT * FROM user")
-    fun getUsers(): Flow<List<User>>
-    @Query("SELECT fullName From user")
+    @Query("SELECT * FROM user_table")
+    fun getUsers(): Flow<List<UserData>>
+    @Query("SELECT name From user_table")
     fun getUsersName(): List<String>
 
-    @Query("SELECT * FROM user WHERE fullName = :username LIMIT 1")
-    fun getUser(username: String): User
+    @Query("SELECT * FROM user_table WHERE name = :username LIMIT 1")
+    fun getUser(username: String): UserData
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(user: User)
+    fun insert(user: UserData)
 
 }

@@ -31,9 +31,9 @@ class Register : AppCompatActivity(), View.OnClickListener {
     private var pfpView: ImageView? = null
     var db: RoomDatabase? = null
 
-    private val mUserViewModel: MainViewModel by viewModels {
-        UserViewModelFactory((application as UserApplication).repository)
-    }
+//    private val mUserViewModel: MainViewModel by viewModels {
+//        UserViewModelFactory((application as UserApplication).repository)
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,31 +54,20 @@ class Register : AppCompatActivity(), View.OnClickListener {
             R.id.loginButton -> {
                 if (!loginButton!!.text.toString().isNullOrEmpty()) {
 
-                    var names = mUserViewModel.allNames
+//                    var names = mUserViewModel.allNames
 
-                    if (names.contains(fullName!!.text.toString())) {
-                        var users = mUserViewModel.allUsers
 
-                        val intent = Intent(this, HomeActivity::class.java)
-                        var user = null
-//                        intent.putExtra("EXTRA_FULLNAME", name)
-//                        intent.putExtra("EXTRA_LOCATION", location)
-//                        intent.putExtra("PFP_IMAGE", pfp)
-//                        intent.putExtra("EXTRA_ACTIVITY", activityVar)
-//                        intent.putExtra("EXTRA_SEX", sexVar)
-//                        intent.putExtra("EXTRA_AGE", ageVar)
-//                        intent.putExtra("EXTRA_FOOT", footVar)
-//                        intent.putExtra("EXTRA_INCHES", inchVar)
-//                        intent.putExtra("EXTRA_WEIGHT", weightVar)
-                        startActivity(intent)
-                    }
-                    else {
+//                        var user: UserData? = UserData()
+//                        user!!.name = fullName!!.text.toString()
+//                        user!!.location = userLocation!!.text.toString()
+//                        //user!!.pfp = pfpView!!.drawable.toBitmap()
+//                        mUserViewModel.setUserData(user)
                         val intent = Intent(this, Register2::class.java)
                         intent.putExtra("EXTRA_FULLNAME", fullName!!.text.toString())
                         intent.putExtra("EXTRA_LOCATION", userLocation!!.text.toString())
                         intent.putExtra("PFP_IMAGE", pfpView!!.drawable.toBitmap())
                         startActivity(intent)
-                    }
+
 
                 } else {
                     Toast.makeText(

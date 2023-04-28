@@ -13,3 +13,14 @@ class UserApplication: Application() {
 
     val repository by lazy {UserRepository.getInstance(database.userDao(),applicationScope)}
 }
+
+//
+//class LifestyleApplication : Application() {
+//
+//    val applicationScope = CoroutineScope(SupervisorJob())
+//
+//    // Inject scope and application context into singleton database
+//    val database by lazy{ LifestyleRoomDatabase.getDatabase(this, applicationScope) }
+//
+//    val repository by lazy{ LifestyleRepository.getInstance(database.userDao(), applicationScope) }
+//}

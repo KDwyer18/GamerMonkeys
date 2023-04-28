@@ -8,10 +8,10 @@ import kotlinx.coroutines.flow.Flow
 class UserRepository private constructor(userDao: UserDao) {
 
     // This LiveData object that is notified when we've fetched the weather
-    val data = MutableLiveData<User>()
+    val data = MutableLiveData<UserData>()
 
     // This flow is triggered when any change happens to the database
-    val allUsers: Flow<List<User>> = userDao.getUsers()
+    val allUsers: Flow<List<UserData>> = userDao.getUsers()
 
     var name = ""
     var location = ""
@@ -26,7 +26,7 @@ class UserRepository private constructor(userDao: UserDao) {
     private var mUserDao: UserDao = userDao
 
     @WorkerThread
-    suspend fun insert(userInfo: User) {
+     fun insert(userInfo: UserData) {
         if (name != null) {
 //            mUserDao.insert(User( name, bmr, feet, inches, sex, age, activityLevel, location, weight))
             mUserDao.insert(userInfo)
@@ -34,7 +34,7 @@ class UserRepository private constructor(userDao: UserDao) {
     }
 
     @WorkerThread
-    fun getUsers(): Flow<List<User>> {
+    fun getUsers(): Flow<List<UserData>> {
         return mUserDao.getUsers()
     }
 
@@ -44,7 +44,7 @@ class UserRepository private constructor(userDao: UserDao) {
     }
 
     @WorkerThread
-    fun getName(name: String): User {
+    fun getName(name: String): UserData {
         return mUserDao.getUser(name)
     }
 

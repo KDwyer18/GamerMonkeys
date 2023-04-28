@@ -1,13 +1,21 @@
 package com.example.gamermonke
 
+import android.graphics.Bitmap
+import androidx.annotation.NonNull
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "user_table")
 class UserData {
-    var name = ""
-    var location = ""
-    var feet = 0
-    var inches = 0
-    var sexArr = ""
-    var activityLevel = ""
-    var age = 0
-    var weight = 0.0
-    var bmr = 0.0
+    @PrimaryKey
+    var name: String = ""
+    var location: String = ""
+    var feet: String = ""
+    var inches: String = ""
+    var sexArr: String = ""
+    var activityLevel: String = ""
+    var age: String = ""
+    var weight: String = ""
+    var bmr: String = ""
+    //var pfp: Bitmap? = null
 }
