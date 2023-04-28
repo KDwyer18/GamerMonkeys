@@ -1,19 +1,18 @@
 package com.example.gamermonke
 
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface UserDao {
     @Query("SELECT * FROM user")
-    fun getUsers(): List<User>
+    fun getUsers(): Flow<List<User>>
+    @Query("SELECT fullName From user")
+    fun getUsersName(): List<String>
 
-    @Query("SELECT * FROM user WHERE first_name LIKE :first AND " +
-            "last_name LIKE :last LIMIT 1")
-    fun findByName(first: String, last: String): User
+    @Query("SELECT * FROM user WHERE fullName = :username LIMIT 1")
+    fun getUser(username: String): User
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insert(user: User)
 
-    @Insert
-    fun insertAll(vararg users: User)
-
-    @Delete
-    fun delete(user: User)
 }
